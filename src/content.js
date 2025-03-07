@@ -1,6 +1,8 @@
 import casseroleGIF from "./assets/hl_casserole.gif";
 import headcrabIMG from "./assets/hl_stew.png";
 import vortIMG from "./assets/hl_vort.png";
+import coffeeMachineIMG from "./assets/coffee_machine.png";
+import casseroleIMG from "./assets/hl_casserole.png";
 
 export const pageContent = [
   // Homepage content
@@ -41,6 +43,7 @@ export const pageContent = [
       title: "Lambda Latte",
       content:
         "The perfect pick-me-up for long hours of theoretical physics. Strong enough to wake even the most exhausted research associate.",
+      image: coffeeMachineIMG,
     },
     {
       title: "Vortigaunt Veggie Stew",
@@ -52,6 +55,7 @@ export const pageContent = [
       title: "Microwave Casserole (Caution Advised)",
       content:
         "For the truly brave. A standard casserole enhanced with unique *reactive* properties when heated. May cause anomalous fluctuations.",
+      image: casseroleIMG,
     },
   ],
 
