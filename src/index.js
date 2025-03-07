@@ -1,26 +1,11 @@
 import "./style.css";
-import casseroleGIF from "./assets/hl_casserole.gif";
+import { pageContent } from "./content.js";
+
 const contentElement = document.querySelector("#content");
 const homeButton = document.querySelector("#home");
-
-const firstPageContent = [
-  {
-    title: "About Us",
-    content:
-      "Fueling the finest minds in theoretical physics, anomalous materials, and interdimensional exploration since 1989. Whether you're here for a quick coffee before a resonance cascade or a full meal after a long containment breach, we've got you covered.",
-  },
-  {
-    title: "Today's special: Magnusson's casserole!",
-    content:
-      "Fueling the finest minds in theoretical physics, anomalous materials, and interdimensional exploration since 1989. Whether you're here for a quick coffee before a resonance cascade or a full meal after a long containment breach, we've got you covered.",
-    image: casseroleGIF,
-  },
-  {
-    title: "Opening Hours",
-    content:
-      "The Black Mesa cafeteria is open 24/7 for your sustenance needs. Exceptions may apply in case of emergencies such as: ressonance cascades, Xen invasions, Nuclear war, anomalous materials spills, rogue AI incidents or in case of microwave casserole spontaneous combustion.",
-  },
-];
+const menuButton = document.querySelector("#menu");
+const aboutButton = document.querySelector("#about");
+let buttons = document.querySelectorAll("button");
 
 function createItem(title, content, image = false, container = contentElement) {
   let itemElement = document.createElement("div");
@@ -37,7 +22,7 @@ function createItem(title, content, image = false, container = contentElement) {
   itemElement.appendChild(titleElement);
 
   let contentElement = document.createElement("p");
-  contentElement.textContent = content;
+  contentElement.innerHTML = content; // Do innerHTML to be able to use <br>
   itemElement.appendChild(contentElement);
 
   container.appendChild(itemElement);
@@ -63,10 +48,54 @@ function clearPage() {
   });
 }
 
-// createItem("Test", "Lorem Ipsum", casseroleGIF, contentElement);
+function updateTitle(text) {
+  let title = document.querySelector(".title > h1");
+  title.textContent = text;
+}
 
-document.addEventListener("load", fillPage(firstPageContent));
-homeButton.addEventListener("click", () => {
-  clearPage();
-  fillPage(firstPageContent);
+function loadPage(page) {
+  homeButton.classList.remove("active");
+  menuButton.classList.remove("active");
+  aboutButton.classList.remove("active");
+  switch (page) {
+    case 0:
+      clearPage();
+      fillPage(pageContent[0]);
+      updateTitle("Welcome to the Black Mesa Cafeteria");
+      homeButton.classList.add("active");
+      break;
+    case 1:
+      clearPage();
+      fillPage(pageContent[1]);
+      updateTitle("Our Menu");
+      menuButton.classList.add("active");
+      break;
+    case 2:
+      clearPage();
+      fillPage(pageContent[2]);
+      updateTitle("About Us");
+      aboutButton.classList.add("active");
+      break;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadPage(0);
+});
+
+buttons.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    console.log(e.target.id);
+    switch (e.target.id) {
+      case "home":
+        loadPage(0);
+        break;
+      case "menu":
+        loadPage(1);
+        break;
+      case "about":
+        loadPage(2);
+        break;
+    }
+  });
 });

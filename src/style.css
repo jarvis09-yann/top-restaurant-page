@@ -73,6 +73,10 @@ nav button:hover {
   place-items: center;
 }
 
+.item p {
+  width: 100%;
+}
+
 .item h2:not(.title h2) {
   place-self: center start;
 }
